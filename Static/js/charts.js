@@ -3,9 +3,9 @@ function init() {
   var selector = d3.select("#selDataset");
 
   // Use the list of sample names to populate the select options
-  d3.json("samples.json").then((data) => {
+  d3.json("samples").then((data) => {
     var sampleNames = data.names;
-
+    console.log(data)
     sampleNames.forEach((sample) => {
       selector
         .append("option")
@@ -32,7 +32,7 @@ function optionChanged(newSample) {
 
 // Demographics Panel 
 function buildMetadata(sample) {
-  d3.json("samples.json").then((data) => {
+  d3.json("samples").then((data) => {
     var metadata = data.metadata;
     // Filter the data for the object with the desired sample number
     var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
@@ -65,13 +65,13 @@ function buildCharts(sample) {
     // Deliverable 1: 4. Create a variable that filters the samples for the object with the desired sample number.
     var sample_filter = chart_samples.filter(sampleObj => sampleObj.id == sample)
     // Deliverable 3: 1. Create a variable that filters the metadata array for the object with the desired sample number.
-    sampleResults = sampleArray[0]
+    var sampleResults = sampleArray[0]
     // Deliverable 1: 5. Create a variable that holds the first sample in the array.
-    firstSample = chart_samples[0]
+    var firstSample = sample_filter[0]
     // Deliverable 3: 2. Create a variable that holds the first sample in the metadata array.
-    firstMetadata = data.metadata[0]
+    var firstMetadata = data.metadata[0]
     // Deliverable 1: 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
-    var otuIds = sampleResults.otu_ids
+    var otuIds = firstSample.otu_ids
     var otuLables = sampleResults.otu_labels
     var otuSampleValues = sampleResults.sample_values
 
